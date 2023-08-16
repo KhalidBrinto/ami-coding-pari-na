@@ -45,6 +45,60 @@ This should start and run the application in local server.
 
 If you wish to containerize the application with Docker, create a docker image and run the 'Dockerfile' in this directory.
 
+## API Documentation
 
 
 
+**Get authentication token:** To be able to access the API, user needs to get authenticated first. A registered user can obtain the authentication token from the following api-endpoint-
+```
+ /api/gettoken
+```
+Note: the user should make a POST request and provide the username and password in JSON format. For example:
+```
+ {
+	 "username":<username>,
+	 "password":<password>
+ }
+```
+following successful request, the user will get an authentication token as a response like this-
+```
+{
+	"token":  "c0eafasi4753f717d32a018abchdheua3ed1a2"
+}
+```
+finally, user can consume the API.
+
+### API endpoint:
+- **Get All Input Values**
+
+> Parameters: start_datetime, end_datetime, user_id
+
+> Returns: All the Input Values the user ever entered within start_datetime(inclusive) and end_datetime (inclusive)
+
+> Endpoint: 
+```
+ /api/getinputvalues
+```
+Example:
+
+POST request:
+```
+api/getinputvalues?start_datetime=2023-08-16 07:51:06&end_datetime=2023-08-16 07:55:55&user_id=5
+```
+Response: 
+```
+{
+	"status":  "success",
+	"user_id":  "5",
+	"payload":  [
+		{
+		"timestamp":  "2023-08-16T07:55:55Z",
+		"input_values":  "110, 99, 77, 64, 45, 35, 23, 11, 8, 5, 2"
+		}
+	]
+}
+```
+- **Note:** User must include the authorization token in the request header. The header key should be named as "Authorization". See the following example:
+```
+Authorization: token c0eafasi4753f717d32a018abchdheua3ed1a2
+```
