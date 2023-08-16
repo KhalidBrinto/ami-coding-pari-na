@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if error_message %}
+<script>alert('{{error_message}}')</script>
+{% endif %}
+  <div class="container">
+    <header class="header">
+        <h1 id="title" class="text-center mt-4">Login</h1>
+    </header>
+
+    <div class="form-wrap">
+        <form id="survey-form" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label id="name-label" for="username">Username</label>
+                        <input type="text" id="username" class="form-control" name="username" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label id="number-label" for="password">Password</label>
+                        <input type="password" id="password" class="form-control" name="password">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
